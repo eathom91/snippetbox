@@ -7,6 +7,7 @@ import (
 	"os"
 )
 
+// application struct will manage project's dependency needs
 type application struct {
 	errorLog *log.Logger
 	infoLog  *log.Logger
