@@ -1,5 +1,7 @@
 package main
 
+// Handlers.go is a go file containing all the handler functions that will be associated
+// and used with app as the receiver.
 import (
 	"fmt"
 	"html/template"
