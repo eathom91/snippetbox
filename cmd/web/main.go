@@ -14,27 +14,24 @@ type application struct {
 }
 
 func main() {
+	// Creating, parsing flags from CLI
 	addr := flag.String("addr", ":4000", "HTTP Network Address")
 	flag.Parse()
+	// Creating info, error loggers
 	infoLog := log.New(os.Stdin, "INFO\t", log.Ldate|log.Ltime)
 	errorLog := log.New(os.Stdin, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
+	// Creating application obj with logger intialization.
 	app := &application{
 		errorLog: errorLog,
 		infoLog:  infoLog,
 	}
-	mux := http.NewServeMux()
-	fileServer := http.FileServer(http.Dir("./ui/static"))
-	mux.Handle("/static/", http.StripPrefix("/static", fileServer))
-	mux.HandleFunc("/", app.home)
-	mux.HandleFunc("/snippet/view", app.snippetView)
-	mux.HandleFunc("/snippet/create", app.snippetCreate)
-
+	// Creating the server with the port address, errorLogger, and mux with all our routes.
 	srv := &http.Server{
 		Addr:     *addr,
 		ErrorLog: errorLog,
-		Handler:  mux,
+		Handler:  app.routes(),
 	}
-
+	// Info logging, and begin server listening.
 	infoLog.Printf("Starting server on %s", *addr)
 	err := srv.ListenAndServe()
 	errorLog.Fatal(err)
