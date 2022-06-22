@@ -1,5 +1,6 @@
 package main
 
+// Main entry point for application execution.
 import (
 	"flag"
 	"log"
