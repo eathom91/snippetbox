@@ -20,15 +20,15 @@ type application struct {
 func main() {
 	// Creating, parsing flags from CLI
 	addr := flag.String("addr", ":4000", "HTTP Network Address")
-	dsn := flag.String("dsn", "web:pass@/snippetbox?parseTime=true", "MySQL data source name")
+	dsn := flag.String("dsn", "web:Voyager1@3@/snippetbox?parseTime=true", "MySQL data source name")
 
 	flag.Parse()
 
 	// Creating info, error loggers
 	infoLog := log.New(os.Stdin, "INFO\t", log.Ldate|log.Ltime)
 	errorLog := log.New(os.Stdin, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
-	
-	// Using openDB func to open a connection to the DB
+
+	// Using openDB func to open a pool of connections for the DB
 	db, err := openDB(*dsn)
 
 	if err != nil {
