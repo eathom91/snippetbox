@@ -27,8 +27,10 @@ func main() {
 	// Creating info, error loggers
 	infoLog := log.New(os.Stdin, "INFO\t", log.Ldate|log.Ltime)
 	errorLog := log.New(os.Stdin, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
-
+	
+	// Using openDB func to open a connection to the DB
 	db, err := openDB(*dsn)
+
 	if err != nil {
 		errorLog.Fatal(err)
 	}
