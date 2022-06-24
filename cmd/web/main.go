@@ -4,6 +4,7 @@ package main
 import (
 	"database/sql"
 	"flag"
+	"github.com/eathom91/snippetbox/internal/models"
 	"log"
 	"net/http"
 	"os"
@@ -15,6 +16,7 @@ import (
 type application struct {
 	errorLog *log.Logger
 	infoLog  *log.Logger
+	snippets *models.SnippetModel
 }
 
 func main() {
@@ -30,7 +32,6 @@ func main() {
 
 	// Using openDB func to open a pool of connections for the DB
 	db, err := openDB(*dsn)
-
 	if err != nil {
 		errorLog.Fatal(err)
 	}
@@ -40,6 +41,7 @@ func main() {
 	app := &application{
 		errorLog: errorLog,
 		infoLog:  infoLog,
+		snippets: &models.SnippetModel{DB: db},
 	}
 
 	// Creating the server with the port address, errorLogger, and mux with all our routes.
