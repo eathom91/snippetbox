@@ -9,7 +9,7 @@ import (
 	"strconv"
 )
 
-// Functions now attached to app struct receier.
+// Functions now attached to app struct receiver.
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		app.notFound(w)
