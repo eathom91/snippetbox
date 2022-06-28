@@ -1,6 +1,6 @@
 package main
 
-// Main entry point for application execution.
+// Main entry point for the application execution.
 import (
 	"database/sql"
 	"flag"
