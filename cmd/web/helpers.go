@@ -1,7 +1,7 @@
 package main
 
 // Helpers.go contains helper functions that will be used in inside the various handler
-// functions to log errors in a more clean way.
+// functions to log errors in a more clean way
 import (
 	"fmt"
 	"net/http"
