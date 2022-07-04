@@ -17,6 +17,7 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 		app.notFound(w)
 		return
 	}
+
 	snippets, err := app.snippets.Latest()
 	if err != nil {
 		app.serverError(w, err)
@@ -24,6 +25,7 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for _, snippet := range snippets {
+		fmt.Println(len(snippets))
 		fmt.Fprintf(w, "%+v\n", snippet)
 	}
 
@@ -61,7 +63,7 @@ func (app *application) snippetView(w http.ResponseWriter, r *http.Request) {
 	}
 
 	files := []string{
-		"./ui/html/base.tmpl",
+		"./ui/html/pages/base.tmpl",
 		"./ui/html/partials/nav.tmpl",
 		"./ui/html/pages/view.tmpl",
 	}
