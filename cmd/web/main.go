@@ -58,6 +58,7 @@ func main() {
 }
 
 func openDB(dsn string) (*sql.DB, error) {
+	// First param to sql.Open is a driver, second is a data source name (connection string).
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {
 		return nil, err
