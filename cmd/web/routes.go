@@ -2,10 +2,7 @@ package main
 
 // Routes.go contains all the logic for registering routes in a mux that is then returned.
 // Routes.go makes use of the handlers.go functions to initialize each route
-import (
-	"github.com/justinas/alice"
-	"net/http"
-)
+import "net/http"
 
 func (app *application) routes() http.Handler {
 	mux := http.NewServeMux()
@@ -17,7 +14,5 @@ func (app *application) routes() http.Handler {
 	mux.HandleFunc("/snippet/view", app.snippetView)
 	mux.HandleFunc("/snippet/create", app.snippetCreate)
 
-	standard := alice.New(app.recoverPanic, app.logRequest, secureHeaders)
-
-	return standard.Then(mux)
+	return app.recoverPanic(app.logRequest(secureHeaders(mux)))
 }
